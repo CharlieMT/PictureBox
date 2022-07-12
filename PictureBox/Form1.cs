@@ -1,13 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
 
 namespace PictureBox
 {
@@ -29,15 +23,12 @@ namespace PictureBox
 
         private FileOpener fileOpener = new FileOpener();
 
-        
-
         public Main()
         {
             InitializeComponent();
             buttonsManager = new ButtonsManager(btPrevious, btNext, pbMainPicture);
             InitializeMainMenu();
         }
-
 
         public void InitializeMainMenu()
         {
@@ -111,7 +102,7 @@ namespace PictureBox
                     indexOfImage = imageList.Count - 1;
                    
                     pbMainPicture.Image = imageList[indexOfImage];
-                ImageResize();
+                ImageViewerSet();
             }
             Invalidate();
         }
@@ -125,7 +116,7 @@ namespace PictureBox
                     indexOfImage = 0;
 
                 pbMainPicture.Image = imageList[indexOfImage];
-                ImageResize();
+                ImageViewerSet();
             }
             Invalidate();
         }
@@ -167,10 +158,10 @@ namespace PictureBox
             buttonsManager.ButtonsStatusSet(fileOpened);
             closeMenuItem.Enabled = fileOpened;
 
-            ImageResize();
+            ImageViewerSet();
         }
 
-        private void ImageResize()
+        private void ImageViewerSet()
         {
             var offset = pbxImageViewre.Width / 3;
             var prevIndex = (indexOfImage - 1) < 0 ? (imageList.Count -1) : indexOfImage-1;
